@@ -19,9 +19,9 @@
 <meta name="twitter:image" content="https://gurelahmetcan.dev/og.png">
 <link rel="canonical" href="https://gurelahmetcan.dev/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 
 <style>
 /* Social icons: Font Awesome Free 6.5.1, https://fontawesome.com/license/free (CC BY 4.0) */
@@ -356,6 +356,7 @@ p { margin: 0; }
 .footer a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; }
 .footer a:hover { color: var(--accent); }
 .footer svg { width: 14px; height: 14px; }
+.footer__legal { display: flex; flex-wrap: wrap; align-items: center; column-gap: 20px; }
 
 @media (max-width: 860px) {
   .contact__grid { grid-template-columns: minmax(0, 1fr); align-items: start; }
@@ -738,7 +739,7 @@ p { margin: 0; }
 </section>
 
 <footer class="footer">
-  <div class="wrap footer__inner"><span>© 2026 Ahmetcan Gürel</span><a href="#top">Back to top <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></a></div>
+  <div class="wrap footer__inner"><span class="footer__legal"><span>© 2026 Ahmetcan Gürel</span><a href="imprint.html">Impressum</a><a href="privacy.html">Datenschutz</a></span><a href="#top">Back to top <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></a></div>
 </footer>
 </div>
 
