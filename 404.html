@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Ahmetcan Gürel</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #14161B; --text: #E8E9EC; --text-strong: #F1F2F4; --muted: #A4A9B5; --accent: #3FBF8F; --on-accent: #0F1A15; --line-strong: #4A5060; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.55 Inter, system-ui, sans-serif;
+  display: grid; place-items: center; padding: 24px;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+main { max-width: 520px; }
+.code { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: clamp(88px, 22vw, 160px); line-height: .9; letter-spacing: -.04em; color: var(--accent); margin: 0 0 18px; }
+h1 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: clamp(28px, 6vw, 40px); line-height: 1.1; letter-spacing: -.02em; color: var(--text-strong); margin: 0 0 12px; }
+p { margin: 0 0 28px; color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 12px; }
+a { display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border-radius: 12px; font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .2s cubic-bezier(0.16,1,0.3,1), background-color .2s; }
+a:active { transform: translateY(1px); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.primary { background: var(--accent); color: var(--on-accent); }
+.primary:hover { background: #52CC9E; }
+.ghost { color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.ghost:hover { background: rgba(255,255,255,.04); }
+</style>
+</head>
+<body>
+<main>
+  <p class="code" aria-hidden="true">404</p>
+  <h1>This level doesn't exist.</h1>
+  <p>The page you're looking for isn't here. Maybe it moved, maybe the link has a typo.</p>
+  <div class="links">
+    <a class="primary" href="/">Back to the homepage</a>
+    <a class="ghost" href="/#play">Play a game</a>
+  </div>
+</main>
+</body>
+</html>

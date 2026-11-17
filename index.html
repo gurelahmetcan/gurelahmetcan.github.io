@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmetcan Gürel, Unity Gameplay Developer</title>
+<meta name="description" content="Unity gameplay developer and game designer in Cologne. Mobile games with 10M+ downloads, plus small web games you can play in the browser.">
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ahmetcan Gürel, Unity Gameplay Developer">
+<meta property="og:description" content="I build games that millions of people play.">
+<meta property="og:url" content="https://gurelahmetcan.dev/">
+<meta property="og:image" content="https://gurelahmetcan.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ahmetcan Gürel: I build games that millions of people play.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gurelahmetcan.dev/og.png">
+<link rel="canonical" href="https://gurelahmetcan.dev/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* Social icons: Font Awesome Free 6.5.1, https://fontawesome.com/license/free (CC BY 4.0) */
+:root {
+  --bg: #14161B;
+  --bg-raised: #1A1D24;
+  --surface: #1C1F26;
+  --chip: #2A2F3A;
+  --line: #2E333E;
+  --line-strong: #4A5060;
+  --text: #E8E9EC;
+  --text-strong: #F1F2F4;
+  --muted: #A4A9B5;
+  --accent: #3FBF8F;
+  --on-accent: #0F1A15;
+  --display: 'Bricolage Grotesque', Inter, system-ui, sans-serif;
+  --pad: clamp(20px, 5vw, 40px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; line-height: 1.5; }
+img { max-width: 100%; }
+::selection { background: var(--accent); color: var(--on-accent); }
+a { color: var(--text); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--display); color: var(--text-strong); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding-inline: var(--pad); }
+.section { padding-bottom: clamp(64px, 9vw, 96px); }
+.section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+.section-title { font-weight: 700; font-size: clamp(32px, 4.5vw, 44px); line-height: 1.1; letter-spacing: -0.015em; }
+.section-lede { font-size: clamp(16px, 1.6vw, 18px); line-height: 1.55; color: var(--muted); max-width: 640px; }
+.kicker { font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 12px 24px; border-radius: 10px;
+  font-weight: 600; font-size: 16px; text-decoration: none;
+  border: 1px solid var(--line-strong); color: var(--text); background: transparent;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.btn:hover { border-color: var(--text); color: var(--text); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn--primary:hover { background: #56CC9F; border-color: #56CC9F; color: var(--on-accent); }
+.btn--sm { min-height: 44px; padding: 10px 20px; font-size: 15px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px; font-weight: 500; }
+.links a { display: inline-block; padding: 8px 0; }
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(20, 22, 27, .82);
+  -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid transparent; transition: border-color .3s var(--ease);
+}
+.nav.is-scrolled { border-bottom-color: var(--line); }
+.nav__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 700; font-size: 20px; text-decoration: none; color: var(--text); }
+.brand:hover { color: var(--text); }
+.brand__mark { width: 14px; height: 14px; border-radius: 4px; background: var(--accent); }
+.nav__links { display: flex; flex-wrap: wrap; gap: 0 28px; font-size: 15px; font-weight: 500; }
+.nav__links a { text-decoration: none; padding: 10px 0; position: relative; transition: color .25s var(--ease); }
+.nav__links a[aria-current="true"] { color: var(--accent); }
+.nav__links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transition: transform .35s var(--ease); }
+.nav__links a[aria-current="true"]::after { transform: scaleX(1); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 48px; padding-top: clamp(36px, 6vw, 72px); padding-bottom: clamp(40px, 5vw, 56px); }
+.hero__text { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.hero h1 { font-weight: 700; font-size: clamp(40px, 6vw, 84px); line-height: 1.02; letter-spacing: -.025em; }
+.hero .lede { font-size: clamp(17px, 1.8vw, 20px); line-height: 1.55; max-width: 560px; color: var(--muted); }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--muted); }
+.status svg { width: 16px; height: 16px; color: var(--accent); flex: none; }
+.hero .btn-row { margin-top: 4px; }
+.socials { display: flex; flex-wrap: wrap; gap: 10px; }
+.socials a {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--muted);
+  transition: color .25s var(--ease), border-color .25s var(--ease), transform .35s var(--ease);
+}
+.socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+.socials svg { width: 18px; height: 18px; }
+
+/* Hero art: a loose pile of game icons */
+.hero__art { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 22px); max-width: 440px; justify-self: end; width: 100%; }
+.hero__art li { aspect-ratio: 1; transform: translateY(var(--y, 0)) rotate(var(--r, 0deg)); transition: transform .5s var(--ease); }
+.hero__art li:nth-child(3n+2) { --y: 34px; }
+.hero__art img {
+  width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 22%;
+  background: #000; box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 30px -14px rgba(0,0,0,.85);
+  outline: 1px solid rgba(255,255,255,.07); outline-offset: -1px;
+}
+.hero__art li:hover { transform: translateY(calc(var(--y, 0px) - 8px)) rotate(0deg) scale(1.08); z-index: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__art li { animation: tile-in .9s var(--ease) backwards; animation-delay: calc(var(--i) * 70ms + 150ms); }
+  @keyframes tile-in { from { opacity: 0; transform: translateY(calc(var(--y, 0px) + 28px)) rotate(0deg) scale(.86); } }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero__art { order: -1; display: flex; max-width: none; justify-self: start; gap: 0; padding-left: 6px; }
+  .hero__art li { width: 56px; flex: none; margin-left: -6px; --y: 0px !important; }
+  .hero__art li:nth-child(n+7) { display: none; }
+  .hero__art img { border-radius: 24%; box-shadow: 0 0 0 3px var(--bg), 0 10px 18px -10px rgba(0,0,0,.9); }
+}
+@media (max-width: 520px) {
+  .hero .btn-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero .btn { padding-inline: 12px; min-width: 0; }
+}
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); column-gap: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { padding: 28px 0; display: flex; flex-direction: column; gap: 6px; }
+.stat__num { font-family: var(--display); font-weight: 700; font-size: 48px; line-height: 1; color: var(--text-strong); font-variant-numeric: tabular-nums; }
+.stat__label { font-size: 15px; color: var(--muted); line-height: 1.4; }
+
+/* Cards (work) */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; transition: border-color .3s var(--ease); }
+.card:hover { border-color: #6B7285; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--chip); color: var(--text); }
+
+.featured { display: flex; flex-wrap: wrap; margin-bottom: 24px; }
+.featured__media { flex: 1.5 1 560px; min-width: 0; background: #25324A; display: flex; flex-direction: column; }
+.featured__body { flex: 1 1 380px; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+.featured__body h3 { font-weight: 700; font-size: clamp(32px, 4vw, 40px); line-height: 1.1; }
+.featured__body > div:first-child { display: flex; flex-direction: column; gap: 6px; }
+.featured__studio { font-size: 15px; color: var(--muted); }
+.featured__line { font-size: 17px; line-height: 1.6; color: var(--muted); }
+.featured .app__meta { margin-top: 4px; }
+.featured .app__meta strong { color: var(--text-strong); font-weight: 600; font-size: 15px; }
+.note { font-size: 14px; color: var(--muted); }
+.featured--no-media .featured__media { display: none; }
+.featured--no-media .featured__line { max-width: 68ch; }
+
+.carousel { position: relative; aspect-ratio: 16 / 9; }
+.carousel__track {
+  display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__track { cursor: grab; user-select: none; -webkit-user-select: none; }
+.carousel__track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+.carousel__slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; margin: 0; position: relative; background: #2E3D5A; }
+.carousel__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel__dots { min-height: 56px; display: flex; align-items: center; justify-content: center; }
+.carousel__dot { height: 44px; padding: 0 5px; background: transparent; border: 0; display: flex; align-items: center; cursor: pointer; }
+.carousel__dot span { width: 8px; height: 8px; border-radius: 999px; background: #9AA5BA; display: block; transition: width .4s var(--ease), background-color .4s var(--ease); }
+.carousel__dot[aria-current="true"] span { width: 22px; background: var(--accent); }
+
+.work-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.app { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
+.app:hover { color: inherit; }
+.app:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 20px; }
+.app__shots { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 28px 24px; background: var(--tint); }
+.app__shots img {
+  flex: 1 1 0; min-width: 0; max-width: 150px; aspect-ratio: 9 / 16; object-fit: cover; display: block;
+  border-radius: 16px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.2);
+  transition: transform .6s var(--ease);
+}
+.app:hover .app__shots img:first-child { transform: translateY(-4px) rotate(-1.5deg); }
+.app:hover .app__shots img:last-child { transform: translateY(-4px) rotate(1.5deg); }
+.app__body { padding: 24px 28px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.app__head { display: flex; align-items: center; gap: 16px; }
+.app__icon { width: 60px; height: 60px; border-radius: 14px; flex: none; display: block; object-fit: cover; background: var(--chip); }
+.app__head > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.app__name { font-weight: 700; font-size: 24px; line-height: 1.15; }
+.app__studio { font-size: 14px; color: var(--muted); }
+.app__line { font-size: 15px; line-height: 1.6; color: var(--muted); flex: 1; }
+.app__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.rating { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rating strong { color: var(--text-strong); font-weight: 600; font-size: 15px; }
+.rating svg { width: 15px; height: 15px; color: #F5C451; flex: none; }
+.store { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text); white-space: nowrap; transition: color .25s var(--ease); }
+.store svg { width: 14px; height: 14px; transition: transform .35s var(--ease); }
+.app:hover .store { color: var(--accent); }
+.app:hover .store svg { transform: translate(2px, -2px); }
+
+/* Published-by stamp */
+.stamp {
+  position: absolute; width: 78px; height: 78px; z-index: 2;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+  transition: transform .5s var(--ease);
+}
+.app__shots { position: relative; }
+.app__shots .stamp { top: 12px; right: 12px; }
+.featured__body { position: relative; }
+.featured__body .stamp { top: 20px; right: 20px; width: 88px; height: 88px; }
+.app:hover .stamp, .featured:hover .stamp { transform: rotate(-4deg) scale(1.06); }
+@media (max-width: 520px) { .stamp { width: 66px; height: 66px; } .featured__body .stamp { width: 72px; height: 72px; top: 16px; right: 16px; } }
+
+/* In-development banner card */
+.wip { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 24px; color: inherit; text-decoration: none; min-height: 340px; isolation: isolate; }
+.wip:hover { color: inherit; }
+.wip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wip__art { position: absolute; inset: 0; z-index: -1; }
+.wip__art img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; display: block; transition: transform 1s var(--ease); }
+.wip__art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,22,27,.97) 0%, rgba(20,22,27,.9) 34%, rgba(20,22,27,.35) 62%, rgba(20,22,27,0) 80%); }
+.wip:hover .wip__art img { transform: scale(1.03); }
+.wip__body { max-width: 480px; padding: clamp(28px, 4vw, 44px); display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+.wip__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.wip__badge { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: #BC3A2B; color: #fff; }
+.wip__plat { font-size: 13px; color: var(--muted); }
+.wip__title { font-weight: 700; font-size: clamp(28px, 3.4vw, 36px); line-height: 1.1; }
+.wip__line { font-size: 16px; line-height: 1.6; color: var(--muted); }
+.wip__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.wip:hover .store { color: var(--accent); }
+.wip:hover .store svg { transform: translate(2px, -2px); }
+@media (max-width: 760px) {
+  .wip { min-height: 0; }
+  .wip__art { position: relative; inset: auto; z-index: auto; aspect-ratio: 16 / 7; }
+  .wip__art::after { background: linear-gradient(0deg, var(--surface) 0%, rgba(28,31,38,0) 45%); }
+  .wip__body { max-width: none; padding-top: 4px; }
+}
+
+/* Missing image fallback */
+.is-missing { visibility: hidden; }
+.carousel__slide.has-missing::after {
+  content: attr(data-label); position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center;
+  color: #C9D3E6; font-weight: 600; font-size: 14px;
+}
+
+/* Play */
+.games { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(24px, 4vw, 44px); }
+.games .section-head { margin-bottom: 28px; gap: 8px; }
+.games__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 20px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.game { display: block; color: inherit; text-decoration: none; border-radius: 18px; }
+.game:hover { color: inherit; }
+.game:focus-visible { outline: none; }
+.game__cover {
+  position: relative; display: block; aspect-ratio: 1; border-radius: 18px; overflow: hidden; background: #000;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 24px -14px rgba(0,0,0,.8);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.game__cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.game__cover img[src$="hell-college.png"] { image-rendering: pixelated; }
+.game__cover::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); pointer-events: none; }
+.game__tag { position: absolute; top: 10px; left: 10px; z-index: 1; font-size: .7rem; font-weight: 600; letter-spacing: .02em; padding: 4px 8px; border-radius: 999px; background: rgba(8,10,12,.78); color: #fff; }
+.game__name { display: block; margin: 14px 2px 4px; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+.game__hook { display: block; margin: 0 2px; color: var(--muted); font-size: .875rem; line-height: 1.45; }
+.game:hover .game__cover, .game:focus-visible .game__cover { transform: translateY(-6px); box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 22px 36px -18px rgba(0,0,0,.9); }
+.game:hover .game__cover img, .game:focus-visible .game__cover img { transform: scale(1.06); }
+.game:focus-visible .game__cover { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* About */
+.about { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 72px); padding-top: clamp(16px, 3vw, 32px); }
+.about__intro { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+.about__text { display: flex; flex-direction: column; gap: 20px; }
+.about__text p { font-size: 18px; line-height: 1.65; color: var(--muted); max-width: 62ch; }
+.about h3 { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--text-strong); margin-bottom: 18px; }
+
+.portrait { margin: 0; position: relative; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: linear-gradient(150deg, #22342D, #1C1F26 60%); border: 1px solid var(--line); transform: rotate(-2deg); transition: transform .6s var(--ease); }
+.portrait:hover { transform: rotate(0deg); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.portrait img { color: transparent; font-size: 0; }
+.portrait.is-empty img { display: none; }
+.portrait__fallback { position: absolute; inset: 0; display: none; place-items: center; font-family: var(--display); font-weight: 800; font-size: 72px; letter-spacing: -.04em; color: var(--accent); }
+.portrait.is-empty .portrait__fallback { display: grid; }
+
+.skill-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; max-width: 560px; }
+.skill-list li { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; color: var(--text); }
+.skill-list li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); flex: none; }
+
+.about__details { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); border-top: 1px solid var(--line); padding-top: clamp(32px, 4vw, 48px); }
+.timeline, .facts { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.timeline li:first-child { padding-top: 0; }
+.timeline li:last-child { border-bottom: 0; }
+.timeline time { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.timeline strong { display: block; font-weight: 600; font-size: 16px; color: var(--text-strong); }
+.timeline .where { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; }
+.timeline p { font-size: 15px; line-height: 1.55; color: var(--muted); margin-top: 8px; }
+.facts + h3 { margin-top: 36px; }
+.facts li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.facts li:first-child { padding-top: 0; }
+.facts li:last-child { border-bottom: 0; }
+.facts strong { font-weight: 600; color: var(--text-strong); display: block; }
+.facts span { color: var(--muted); }
+.facts .yr { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+  .about__intro, .about__details { grid-template-columns: minmax(0, 1fr); }
+  .portrait { max-width: 240px; }
+}
+@media (max-width: 520px) {
+  .skill-list { grid-template-columns: minmax(0, 1fr); }
+  .timeline li { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Contact + footer */
+.end { background: var(--bg-raised); border-top: 1px solid var(--line); }
+.contact__grid { padding-block: clamp(64px, 9vw, 96px) clamp(48px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
+.contact__main { display: flex; flex-direction: column; gap: 22px; }
+.contact h2 { font-weight: 700; font-size: clamp(36px, 5vw, 64px); line-height: 1.05; letter-spacing: -.02em; max-width: 760px; }
+.contact__lede { font-size: clamp(17px, 1.8vw, 19px); line-height: 1.55; color: var(--muted); max-width: 520px; }
+.contact .btn-row { margin-top: 6px; }
+
+.mailbtn { display: inline-flex; align-items: stretch; border-radius: 10px; background: var(--accent); color: var(--on-accent); min-height: 48px; }
+.mailbtn__mail { display: inline-flex; align-items: center; padding: 12px 18px 12px 22px; font-weight: 600; font-size: 16px; color: var(--on-accent); text-decoration: none; border-radius: 10px 0 0 10px; transition: background-color .25s var(--ease); }
+.mailbtn__copy { position: relative; display: grid; place-items: center; width: 48px; border: 0; border-left: 1px solid rgba(15, 26, 21, .22); background: transparent; color: var(--on-accent); cursor: pointer; border-radius: 0 10px 10px 0; transition: background-color .25s var(--ease); }
+.mailbtn__mail:hover, .mailbtn__copy:hover { background: #56CC9F; color: var(--on-accent); }
+.mailbtn__copy svg { width: 18px; height: 18px; }
+.copy__done { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translate(-50%, 4px); background: var(--text-strong); color: var(--bg); font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s var(--ease), transform .35s var(--ease); }
+.is-done .copy__done { opacity: 1; transform: translate(-50%, 0); }
+
+.contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 24px; }
+.contact-card__facts { margin: 0; }
+.contact-card__facts > div { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.contact-card__facts dt { color: var(--muted); }
+.contact-card__facts dd { margin: 0; font-weight: 600; color: var(--text-strong); text-align: right; }
+.contact-links { list-style: none; margin: 0; padding: 0; }
+.contact-links li + li { border-top: 1px solid var(--line); }
+.contact-links a { display: flex; align-items: center; gap: 14px; padding: 14px 0; text-decoration: none; color: var(--text); }
+.contact-links__icon { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 10px; background: var(--chip); color: var(--text); transition: background-color .25s var(--ease), color .25s var(--ease); }
+.contact-links__icon svg { width: 17px; height: 17px; }
+.contact-links a > span:nth-child(2) { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.contact-links strong { font-weight: 600; font-size: 15px; }
+.contact-links a > span:nth-child(2) span { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.contact-links .arrow { width: 16px; height: 16px; color: var(--muted); transition: transform .35s var(--ease), color .25s var(--ease); }
+.contact-links a:hover { color: var(--text); }
+.contact-links a:hover .contact-links__icon { background: var(--accent); color: var(--on-accent); }
+.contact-links a:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
+
+.footer__inner { background: linear-gradient(var(--line), var(--line)) no-repeat center top / calc(100% - 2 * var(--pad)) 1px; padding-block: 22px 28px; font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.footer a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; }
+.footer a:hover { color: var(--accent); }
+.footer svg { width: 14px; height: 14px; }
+
+@media (max-width: 860px) {
+  .contact__grid { grid-template-columns: minmax(0, 1fr); align-items: start; }
+}
+@media (max-width: 520px) {
+  .mailbtn { width: 100%; }
+  .mailbtn__mail { flex: 1; justify-content: center; padding-inline: 12px; font-size: 15px; }
+}
+
+@media (max-width: 520px) {
+  html { scroll-padding-top: 116px; }
+  .nav__inner { padding-block: 14px; }
+  .nav__links { gap: 0 22px; }
+  .games__grid { grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
+  .game__hook { font-size: .8rem; }
+  .app__shots { padding: 22px 18px; }
+  .app__body { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="rollic-stamp" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="58" fill="#45187F" stroke="#FFFFFF" stroke-width="2.4"/>
+      <circle cx="60" cy="60" r="54.5" fill="none" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="1.6"/>
+      <circle cx="60" cy="60" r="34" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.2" stroke-dasharray="2.5 3"/>
+      <path id="rollic-stamp-arc" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0" fill="none"/>
+      <text font-family="'Bricolage Grotesque', Inter, sans-serif" font-weight="800" font-size="11" fill="#FFFFFF" dominant-baseline="middle">
+        <textPath href="#rollic-stamp-arc" textLength="266" lengthAdjust="spacing">PUBLISHED BY · PUBLISHED BY ·</textPath>
+      </text>
+      <path transform="translate(33 49.4) scale(.1354)" fill="#FFFFFF" d="M15.37 153.89H1.66c-.91 0-1.66-.74-1.66-1.66V95.99c0-44.43 44.53-67 53.73-71.19.86-.39 1.86 0 2.22.86 1.26 3.04 4.03 9.75 5.26 12.72.34.81-.02 1.74-.82 2.11-7.64 3.61-43.37 22.26-43.37 55.5v56.24c0 .92-.74 1.66-1.66 1.66M217.8 137.88l-.98-.03c-6.15-.21-9.53-3.57-9.76-9.68-.03-.66-.03-1.33-.03-1.99V1.74c0-.9-.73-1.63-1.64-1.63h-12.87c-.91 0-1.64.73-1.64 1.63v78.19h.01c0 15.79-.07 31.58.02 47.37.07 12.31 6.18 21.29 17.16 25.29 3.95 1.44 8.04 1.71 12.15 1.76a1.69 1.69 0 0 0 1.65-2.15l-4.08-14.32ZM117.82 40.13c-31.49-.08-57.07 25.3-57.1 56.64-.03 31.54 25.3 57.13 56.61 57.2 31.52.07 57.01-25.35 57.12-56.98.11-31.19-25.38-56.78-56.63-56.86m-.15 97.87c-22.31-.03-40.32-18.19-40.28-40.59.04-22.14 18.21-40.23 40.4-40.23 22.27 0 40.5 18.24 40.47 40.48-.03 22.26-18.25 40.37-40.59 40.33M300.09 42.3c0-.95-.78-1.74-1.73-1.74h-12.68c-.96 0-1.74.8-1.74 1.76v37.62h.01c0 10.8-.03 46.37-.02 72.83 0 .91.74 1.63 1.66 1.63h12.87c.91 0 1.64-.72 1.64-1.62V42.3M378.57 56.99v-.02h18.67c.92 0 1.66-.74 1.66-1.66V42.39c0-.9-.73-1.63-1.64-1.63h-18.21c-31.2.27-56.45 25.5-56.47 56.64v.34c.03 31.14 25.29 56.39 56.51 56.63v-.04h18.17c.92 0 1.66-.74 1.66-1.66v-12.88c0-.92-.74-1.66-1.66-1.66l-17.87.03c-22.1-.32-40.33-18.52-40.63-40.58.3-21.82 18.08-39.84 39.82-40.58M292.34 0c-5.84 0-10.57 4.73-10.57 10.57s4.73 10.57 10.57 10.57 10.57-4.73 10.57-10.57S298.18 0 292.34 0M264.55 137.88l-.98-.03c-6.15-.21-9.53-3.57-9.76-9.68-.03-.66-.03-1.33-.03-1.99V1.74c0-.9-.73-1.63-1.64-1.63h-12.87c-.9 0-1.64.73-1.64 1.63v78.19h.01c0 15.79-.07 31.58.02 47.37.07 12.31 6.18 21.29 17.16 25.29 3.95 1.44 8.04 1.71 12.15 1.76a1.69 1.69 0 0 0 1.65-2.15l-4.08-14.32Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top"><span class="brand__mark" aria-hidden="true"></span>Ahmetcan Gürel</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#play">Play</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="wrap hero">
+    <div class="hero__text">
+      <p class="status"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 14.5s4.75-4.6 4.75-8.25a4.75 4.75 0 0 0-9.5 0C3.25 9.9 8 14.5 8 14.5z"/><circle cx="8" cy="6.25" r="1.75"/></svg>Cologne, Germany<!-- To show availability, add: &nbsp;·&nbsp; Open to new roles --></p>
+      <h1>I build games that millions of people play.</h1>
+      <p class="lede">Unity gameplay developer and game designer, making games for mobile, PC and the web.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#work">See my work</a>
+        <a class="btn" href="ahmetcan-gurel-cv.pdf" target="_blank" rel="noopener">Download CV</a>
+      </div>
+      <div class="socials">
+        <a href="mailto:gurelahmetcan@gmail.com" aria-label="Email" title="gurelahmetcan@gmail.com"><svg viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg></a>
+        <a href="https://www.linkedin.com/in/ahmetcangurel/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+        <a href="https://github.com/gurelahmetcan" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 496 512" aria-hidden="true"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
+        <a href="https://gurelahmetcan.itch.io" target="_blank" rel="noopener" aria-label="itch.io" title="itch.io"><svg viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M71.92 34.77C50.2 47.67 7.4 96.84 7 109.73v21.34c0 27.06 25.29 50.84 48.25 50.84 27.57 0 50.54-22.85 50.54-50 0 27.12 22.18 50 49.76 50s49-22.85 49-50c0 27.12 23.59 50 51.16 50h.5c27.57 0 51.16-22.85 51.16-50 0 27.12 21.47 50 49 50s49.76-22.85 49.76-50c0 27.12 23 50 50.54 50 23 0 48.25-23.78 48.25-50.84v-21.34c-.4-12.9-43.2-62.07-64.92-75C372.56 32.4 325.76 32 256 32S91.14 33.1 71.92 34.77zm132.32 134.39c-22 38.4-77.9 38.71-99.85.25-13.17 23.14-43.17 32.07-56 27.66-3.87 40.15-13.67 237.13 17.73 269.15 80 18.67 302.08 18.12 379.76 0 31.65-32.27 21.32-232 17.75-269.15-12.92 4.44-42.88-4.6-56-27.66-22 38.52-77.85 38.1-99.85-.24-7.1 12.49-23.05 28.94-51.76 28.94a57.54 57.54 0 0 1-51.75-28.94zm-41.58 53.77c16.47 0 31.09 0 49.22 19.78a436.91 436.91 0 0 1 88.18 0C318.22 223 332.85 223 349.31 223c52.33 0 65.22 77.53 83.87 144.45 17.26 62.15-5.52 63.67-33.95 63.73-42.15-1.57-65.49-32.18-65.49-62.79-39.25 6.43-101.93 8.79-155.55 0 0 30.61-23.34 61.22-65.49 62.79-28.42-.06-51.2-1.58-33.94-63.73 18.67-67 31.56-144.45 83.88-144.45zM256 270.79s-44.38 40.77-52.35 55.21l29-1.17v25.32c0 1.55 21.34.16 23.33.16 11.65.54 23.31 1 23.31-.16v-25.28l29 1.17c-8-14.48-52.35-55.24-52.35-55.24z"/></svg></a>
+      </div>
+    </div>
+    <ul class="hero__art" aria-hidden="true">
+      <li style="--i:0;--r:-7deg"><img src="images/gem-stack-icon.jpg" alt="" width="128" height="128"></li>
+      <li style="--i:1;--r:5deg"><img src="images/roll-five.svg" alt="" width="128" height="128"></li>
+      <li style="--i:2;--r:-3deg"><img src="images/i-want-pizza-icon.jpg" alt="" width="128" height="128"></li>
+      <li style="--i:3;--r:4deg"><img src="images/dyno-racing-icon.jpg" alt="" width="128" height="128"></li>
+      <li style="--i:4;--r:-5deg"><img src="images/shotle.svg" alt="" width="128" height="128"></li>
+      <li style="--i:5;--r:8deg"><img src="images/tap-and-sort-icon.jpg" alt="" width="128" height="128"></li>
+      <li style="--i:6;--r:-4deg"><img src="images/voiceplay-icon.jpg" alt="" width="128" height="128"></li>
+      <li style="--i:7;--r:6deg"><img src="images/vb-roulette.svg" alt="" width="128" height="128"></li>
+      <li style="--i:8;--r:-8deg"><img src="images/the-hand-3d-icon.jpg" alt="" width="128" height="128"></li>
+    </ul>
+  </section>
+
+  <div class="wrap section">
+    <div class="stats">
+      <div class="stat"><span class="stat__num">10M+</span><span class="stat__label">downloads on Racing Online, iOS and Android</span></div>
+      <div class="stat"><span class="stat__num">7</span><span class="stat__label">mobile games shipped across three studios</span></div>
+      <div class="stat"><span class="stat__num">65K+</span><span class="stat__label">App Store ratings across three titles</span></div>
+    </div>
+  </div>
+
+  <section class="wrap section" id="work" aria-labelledby="work-title">
+    <div class="section-head">
+      <h2 class="section-title" id="work-title">Mobile games</h2>
+      <p class="section-lede">Shipped titles from ByteTyper, Studio Bäsch and MintPop.</p>
+    </div>
+
+    <article class="card featured">
+      <div class="featured__media">
+        <div class="carousel" data-carousel>
+          <div class="carousel__track" tabindex="0" aria-label="Racing Online screenshots">
+            <figure class="carousel__slide" data-label="Racing Online multiplayer race from the driver seat"><img src="images/racing-online-online.webp" alt="Racing Online multiplayer race from the driver seat" draggable="false"></figure>
+            <figure class="carousel__slide" data-label="Racing Online racing with friends"><img src="images/racing-online-friends.webp" alt="Racing Online racing with friends" draggable="false"></figure>
+            <figure class="carousel__slide" data-label="Racing Online supercars in the garage"><img src="images/racing-online-supercars.webp" alt="Racing Online supercars in the garage" draggable="false"></figure>
+            <figure class="carousel__slide" data-label="Racing Online car customization screen"><img src="images/racing-online-customize.webp" alt="Racing Online car customization screen" draggable="false"></figure>
+          </div>
+        </div>
+        <div class="carousel__dots" data-dots></div>
+      </div>
+      <div class="featured__body">
+        <svg class="stamp" viewBox="0 0 120 120" role="img" aria-label="Published by Rollic"><use href="#rollic-stamp"/></svg>
+        <div>
+          <h3>Racing Online</h3>
+          <p class="featured__studio">ByteTyper · iOS and Android</p>
+        </div>
+        <p class="featured__line">A multiplayer racing game with more than 10 million downloads. Race your friends online, drive from a first-person view and customize your cars in the garage.</p>
+        <div class="tags"><span class="tag">Racing</span><span class="tag">Multiplayer</span></div>
+        <div class="app__meta"><span class="rating"><strong>10M+</strong> downloads</span><span class="note">No longer on the stores</span></div>
+      </div>
+    </article>
+
+    <div class="work-grid">
+      <a class="card app" href="https://apps.apple.com/us/app/gem-stack/id1601511059" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#33284D">
+          <img src="images/gem-stack-shot-1.jpg" alt="Gem Stack gameplay screenshot" loading="lazy">
+          <img src="images/gem-stack-shot-2.jpg" alt="Gem Stack gameplay screenshot" loading="lazy">
+          <svg class="stamp" viewBox="0 0 120 120" role="img" aria-label="Published by Rollic"><use href="#rollic-stamp"/></svg>
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/gem-stack-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">Gem Stack</h3><span class="app__studio">ByteTyper</span></div>
+          </div>
+          <p class="app__line">Hyper-casual runner. Collect, stack and merge gems while dodging traps.</p>
+          <div class="tags"><span class="tag">Runner</span><span class="tag">Hyper-casual</span></div>
+          <div class="app__meta"><span class="rating"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2l2 4.3 4.6.5-3.4 3.2.9 4.6L8 11.5l-4.1 2.3.9-4.6L1.4 6l4.6-.5z"/></svg><strong>4.6</strong>· 36K ratings</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+      <a class="card app" href="https://apps.apple.com/us/app/i-want-pizza/id1597720573" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#1D3A5A">
+          <img src="images/i-want-pizza-shot-1.jpg" alt="I Want Pizza gameplay screenshot" loading="lazy">
+          <img src="images/i-want-pizza-shot-2.jpg" alt="I Want Pizza gameplay screenshot" loading="lazy">
+          <svg class="stamp" viewBox="0 0 120 120" role="img" aria-label="Published by Rollic"><use href="#rollic-stamp"/></svg>
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/i-want-pizza-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">I Want Pizza</h3><span class="app__studio">ByteTyper</span></div>
+          </div>
+          <p class="app__line">Stack dough, prepare pizzas and donuts, and deliver as many as you can.</p>
+          <div class="tags"><span class="tag">Runner</span><span class="tag">Hyper-casual</span></div>
+          <div class="app__meta"><span class="rating"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2l2 4.3 4.6.5-3.4 3.2.9 4.6L8 11.5l-4.1 2.3.9-4.6L1.4 6l4.6-.5z"/></svg><strong>4.6</strong>· 27K ratings</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+      <a class="card app" href="https://apps.apple.com/us/app/dyno-racing/id1670837357" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#4A2226">
+          <img src="images/dyno-racing-shot-1.jpg" alt="Dyno Racing gameplay screenshot" loading="lazy">
+          <img src="images/dyno-racing-shot-2.jpg" alt="Dyno Racing gameplay screenshot" loading="lazy">
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/dyno-racing-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">Dyno Racing</h3><span class="app__studio">ByteTyper</span></div>
+          </div>
+          <p class="app__line">Tap and hold to rev the engine, manage overheating, upgrade your car and race. A tuning game built around one simple input.</p>
+          <div class="tags"><span class="tag">Racing</span><span class="tag">Casual</span></div>
+          <div class="app__meta"><span class="rating"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2l2 4.3 4.6.5-3.4 3.2.9 4.6L8 11.5l-4.1 2.3.9-4.6L1.4 6l4.6-.5z"/></svg><strong>4.4</strong>· 3.8K ratings</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+      <a class="card app" href="https://apps.apple.com/us/app/tap-sort/id6820909394" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#4A2E1D">
+          <img src="images/tap-and-sort-shot-1.jpg" alt="Tap &amp; Sort gameplay screenshot" loading="lazy">
+          <img src="images/tap-and-sort-shot-2.jpg" alt="Tap &amp; Sort gameplay screenshot" loading="lazy">
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/tap-and-sort-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">Tap &amp; Sort</h3><span class="app__studio">MintPop</span></div>
+          </div>
+          <p class="app__line">ASMR marble sorting puzzle. Time your drops on a moving conveyor and match colors across hundreds of levels.</p>
+          <div class="tags"><span class="tag">Puzzle</span><span class="tag">ASMR</span></div>
+          <div class="app__meta"><span class="rating">iOS</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+      <a class="card app" href="https://apps.apple.com/us/app/voiceplay-zero-screen-kids/id6751637339" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#1B4643">
+          <img src="images/voiceplay-shot-1.jpg" alt="VoicePlay gameplay screenshot" loading="lazy">
+          <img src="images/voiceplay-shot-2.jpg" alt="VoicePlay gameplay screenshot" loading="lazy">
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/voiceplay-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">VoicePlay</h3><span class="app__studio">Studio Bäsch</span></div>
+          </div>
+          <p class="app__line">Two voice-first apps: AI-generated trivia on any topic, and a screen-free kids suite with 8 mini-games controlled entirely by voice.</p>
+          <div class="tags"><span class="tag">Voice</span><span class="tag">AI</span><span class="tag">Kids</span></div>
+          <div class="app__meta"><span class="rating">iOS</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+      <a class="card app" href="https://apps.apple.com/us/app/the-hand-3d/id1591940203" target="_blank" rel="noopener">
+        <div class="app__shots" style="--tint:#47204A">
+          <img src="images/the-hand-3d-shot-1.jpg" alt="The Hand 3D gameplay screenshot" loading="lazy">
+          <img src="images/the-hand-3d-shot-2.jpg" alt="The Hand 3D gameplay screenshot" loading="lazy">
+        </div>
+        <div class="app__body">
+          <div class="app__head">
+            <img class="app__icon" src="images/the-hand-3d-icon.jpg" alt="" loading="lazy">
+            <div><h3 class="app__name">The Hand 3D</h3><span class="app__studio">ByteTyper</span></div>
+          </div>
+          <p class="app__line">A 3D action game where you control the fingers to move the hand.</p>
+          <div class="tags"><span class="tag">Runner</span><span class="tag">Hyper-casual</span></div>
+          <div class="app__meta"><span class="rating">iOS</span><span class="store">App Store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+        </div>
+      </a>
+    </div>
+
+    <a class="card wip" href="https://store.steampowered.com/app/3506100/" target="_blank" rel="noopener">
+      <div class="wip__art"><img src="images/silent-witness.webp" alt="Silent Witness: a samurai detective faces a smiling geisha in a dim tiled room" width="1600" height="452" loading="lazy"></div>
+      <div class="wip__body">
+        <div class="wip__badges"><span class="wip__badge">In development</span><span class="wip__plat">PC · Steam</span></div>
+        <div><h3 class="wip__title">Silent Witness</h3><span class="app__studio">Midnight Bites Games · Solo project</span></div>
+        <p class="wip__line">A dice-builder roguelike. Level up your dice, unlock upgrades and win turn-based battles where every roll counts.</p>
+        <div class="tags"><span class="tag">Roguelike</span><span class="tag">Dice-builder</span><span class="tag">Turn-based</span></div>
+        <div class="wip__meta"><span class="note">Coming soon</span><span class="store">Wishlist on Steam <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></span></div>
+      </div>
+    </a>
+  </section>
+
+  <section class="wrap section" id="play" aria-labelledby="play-title">
+    <div class="games">
+      <div class="section-head">
+        <h2 class="section-title" id="play-title">Play something</h2>
+        <p class="section-lede">Small web games I made. Each one opens in a new tab.</p>
+      </div>
+      <ul class="games__grid">
+        <li>
+          <a class="game" href="https://gurelahmetcan.github.io/shotle/" target="_blank" rel="noopener">
+            <span class="game__cover"><span class="game__tag">Daily</span><img src="images/shotle.svg" alt="" width="512" height="512" loading="lazy"></span>
+            <span class="game__name">Shotle</span>
+            <span class="game__hook">Guess the NBA player from a shot chart.</span>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://roll-five.com/" target="_blank" rel="noopener">
+            <span class="game__cover"><img src="images/roll-five.svg" alt="" width="512" height="512" loading="lazy"></span>
+            <span class="game__name">Roll 5</span>
+            <span class="game__hook">Roll the dice. Can you lift the World Cup?</span>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://gurelahmetcan.github.io/VerspatungBahn/" target="_blank" rel="noopener">
+            <span class="game__cover"><img src="images/vb-roulette.svg" alt="" width="512" height="512" loading="lazy"></span>
+            <span class="game__name">VB Roulette</span>
+            <span class="game__hook">Spin the wheel. Pray to reach Berlin.</span>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://gurelahmetcan.itch.io/one-shot-sale" target="_blank" rel="noopener">
+            <span class="game__cover"><img src="images/one-shot-sale.webp" alt="" width="600" height="600" loading="lazy"></span>
+            <span class="game__name">One Shot Sale</span>
+            <span class="game__hook">Sell the right gear to heroes who get one shot at the monster.</span>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://gurelahmetcan.itch.io/rolls-of-poseidon" target="_blank" rel="noopener">
+            <span class="game__cover"><img src="images/rolls-of-poseidon.webp" alt="" width="600" height="600" loading="lazy"></span>
+            <span class="game__name">Rolls of Poseidon</span>
+            <span class="game__hook">Turn-based dice strategy. Place your pieces, roll and pray.</span>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://gurelahmetcan.itch.io/hell-college" target="_blank" rel="noopener">
+            <span class="game__cover"><img src="images/hell-college.png" alt="" width="600" height="600" loading="lazy"></span>
+            <span class="game__name">Hell College</span>
+            <span class="game__hook">A PICO-8 rhythm game. Hit the beat, chase the high score.</span>
+          </a>
+        </li>
+        <!-- To add a game: copy one <li> above and change href, image, name and hook.
+             Optional label on the cover: <span class="game__tag">New</span> -->
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section about" id="about" aria-labelledby="about-title">
+    <div class="about__intro">
+      <figure class="portrait">
+        <!-- Add your photo as images/portrait.jpg (portrait, about 800x1000) -->
+        <img src="images/portrait.jpg" alt="Ahmetcan Gürel" width="620" height="775" data-portrait>
+        <span class="portrait__fallback" aria-hidden="true">AG</span>
+      </figure>
+      <div class="about__text">
+        <h2 class="section-title" id="about-title">About</h2>
+        <p>I'm a game developer based in Cologne, Germany. I write the gameplay, design the levels and polish the UI, and I like staying with a game after launch to keep improving it.</p>
+        <p>Earlier in my career I worked as a front-end developer with React in Istanbul.</p>
+        <ul class="skill-list" aria-label="What I work with">
+          <li>Unity &amp; C#</li>
+          <li>Gameplay programming</li>
+          <li>UI systems</li>
+          <li>Game &amp; level design</li>
+          <li>Live ops &amp; multiplayer</li>
+          <li>iOS &amp; Android</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="about__details">
+      <div>
+        <h3>Experience</h3>
+        <ol class="timeline">
+          <li>
+            <time>Aug 2026 – Present</time>
+            <div><strong>Game Developer</strong><span class="where">MintPop · Cologne</span>
+            <p>Tap &amp; Sort, an ASMR marble sorting puzzle on iOS.</p></div>
+          </li>
+          <li>
+            <time>Mar 2025 – Jul 2026</time>
+            <div><strong>Game Developer / Game Designer</strong><span class="where">Studio Bäsch · Cologne</span>
+            <p>VoicePlay and VoicePlay Kids: an AI trivia game and a screen-free kids suite, both played entirely by voice.</p></div>
+          </li>
+          <li>
+            <time>Sep 2021 – Mar 2023</time>
+            <div><strong>Game Developer</strong><span class="where">ByteTyper · Istanbul</span>
+            <p>Racing Online (10M+ downloads) and hyper-casual titles published by Rollic.</p></div>
+          </li>
+          <li>
+            <time>Apr 2021 – Sep 2021</time>
+            <div><strong>Software Developer Intern</strong><span class="where">Getir · Istanbul</span>
+            <p>Web features in React for a global ultrafast delivery platform.</p></div>
+          </li>
+          <li>
+            <time>Jul 2020 – Nov 2020</time>
+            <div><strong>Frontend Developer</strong><span class="where">codeventure · Istanbul</span>
+            <p>Started as an intern, then joined full-time building web interfaces.</p></div>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <ul class="facts">
+          <li><div><strong>MA, Game Development &amp; Research</strong><span>TH Köln</span></div><span class="yr">2023 – 2026</span></li>
+          <li><div><strong>BSc, Computer Engineering</strong><span>Hacettepe University</span></div><span class="yr">2017 – 2022</span></li>
+        </ul>
+        <h3>Languages</h3>
+        <ul class="facts">
+          <li><strong>English</strong><span>C1</span></li>
+          <li><strong>Turkish</strong><span>Native</span></li>
+          <li><strong>German</strong><span>Basic</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="end">
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact__grid">
+    <div class="contact__main">
+      <h2 id="contact-title">Let's make something people can't put down.</h2>
+      <p class="contact__lede">Open to gameplay programming roles and game collaborations.</p>
+      <div class="btn-row">
+        <div class="mailbtn">
+          <a class="mailbtn__mail" href="mailto:gurelahmetcan@gmail.com">gurelahmetcan@gmail.com</a>
+          <button class="mailbtn__copy" type="button" data-copy="gurelahmetcan@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 5.5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5A1.5 1.5 0 0 0 4 10.5h1.5"/></svg><span class="copy__done" role="status">Copied</span></button>
+        </div>
+        <a class="btn" href="ahmetcan-gurel-cv.pdf" target="_blank" rel="noopener">Download CV</a>
+      </div>
+    </div>
+    <aside class="contact-card" aria-label="Details">
+      <dl class="contact-card__facts">
+        <div><dt>Now</dt><dd>Game Developer at MintPop</dd></div>
+        <div><dt>Based in</dt><dd>Cologne, Germany · CET</dd></div>
+      </dl>
+      <ul class="contact-links">
+          <li><a href="https://www.linkedin.com/in/ahmetcangurel/" target="_blank" rel="noopener"><span class="contact-links__icon"><svg viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></span><span><strong>LinkedIn</strong><span>/in/ahmetcangurel</span></span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+          <li><a href="https://github.com/gurelahmetcan" target="_blank" rel="noopener"><span class="contact-links__icon"><svg viewBox="0 0 496 512" aria-hidden="true"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span><span><strong>GitHub</strong><span>@gurelahmetcan</span></span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+          <li><a href="https://gurelahmetcan.itch.io" target="_blank" rel="noopener"><span class="contact-links__icon"><svg viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M71.92 34.77C50.2 47.67 7.4 96.84 7 109.73v21.34c0 27.06 25.29 50.84 48.25 50.84 27.57 0 50.54-22.85 50.54-50 0 27.12 22.18 50 49.76 50s49-22.85 49-50c0 27.12 23.59 50 51.16 50h.5c27.57 0 51.16-22.85 51.16-50 0 27.12 21.47 50 49 50s49.76-22.85 49.76-50c0 27.12 23 50 50.54 50 23 0 48.25-23.78 48.25-50.84v-21.34c-.4-12.9-43.2-62.07-64.92-75C372.56 32.4 325.76 32 256 32S91.14 33.1 71.92 34.77zm132.32 134.39c-22 38.4-77.9 38.71-99.85.25-13.17 23.14-43.17 32.07-56 27.66-3.87 40.15-13.67 237.13 17.73 269.15 80 18.67 302.08 18.12 379.76 0 31.65-32.27 21.32-232 17.75-269.15-12.92 4.44-42.88-4.6-56-27.66-22 38.52-77.85 38.1-99.85-.24-7.1 12.49-23.05 28.94-51.76 28.94a57.54 57.54 0 0 1-51.75-28.94zm-41.58 53.77c16.47 0 31.09 0 49.22 19.78a436.91 436.91 0 0 1 88.18 0C318.22 223 332.85 223 349.31 223c52.33 0 65.22 77.53 83.87 144.45 17.26 62.15-5.52 63.67-33.95 63.73-42.15-1.57-65.49-32.18-65.49-62.79-39.25 6.43-101.93 8.79-155.55 0 0 30.61-23.34 61.22-65.49 62.79-28.42-.06-51.2-1.58-33.94-63.73 18.67-67 31.56-144.45 83.88-144.45zM256 270.79s-44.38 40.77-52.35 55.21l29-1.17v25.32c0 1.55 21.34.16 23.33.16 11.65.54 23.31 1 23.31-.16v-25.28l29 1.17c-8-14.48-52.35-55.24-52.35-55.24z"/></svg></span><span><strong>itch.io</strong><span>gurelahmetcan.itch.io</span></span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner"><span>© 2026 Ahmetcan Gürel</span><a href="#top">Back to top <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></a></div>
+</footer>
+</div>
+
+<script>
+(() => {
+  // Hide broken images instead of showing the browser's broken-image icon
+  const markMissing = (img) => {
+    img.classList.add('is-missing');
+    const slide = img.closest('.carousel__slide');
+    if (!slide) return;
+    slide.classList.add('has-missing');
+    // No screenshots at all: drop the media column so the card stays clean
+    const card = slide.closest('.featured');
+    if (card && !card.querySelector('.carousel__slide:not(.has-missing)')) card.classList.add('featured--no-media');
+  };
+  document.querySelectorAll('img').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0) markMissing(img);
+    else img.addEventListener('error', () => markMissing(img), { once: true });
+  });
+
+  // Portrait: show initials until a photo is added
+  const portrait = document.querySelector('[data-portrait]');
+  if (portrait) {
+    const empty = () => portrait.closest('.portrait').classList.add('is-empty');
+    if (portrait.complete && portrait.naturalWidth === 0) empty();
+    portrait.addEventListener('error', empty, { once: true });
+  }
+
+  // Highlight the nav link for the section in view
+  const navLinks = [...document.querySelectorAll('.nav__links a')];
+  const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const setActive = (id) => navLinks.forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === '#' + id ? 'true' : 'false'));
+  const spy = () => {
+    const line = window.innerHeight * 0.35;
+    let current = '';
+    sections.forEach((sec) => { if (sec.getBoundingClientRect().top <= line) current = sec.id; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1].id;
+    setActive(current);
+  };
+  spy();
+  window.addEventListener('scroll', spy, { passive: true });
+
+  // Copy email
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(btn.dataset.copy); }
+      catch { const t = document.createElement('textarea'); t.value = btn.dataset.copy; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+      btn.classList.add('is-done');
+      clearTimeout(btn._t); btn._t = setTimeout(() => btn.classList.remove('is-done'), 1600);
+    });
+  });
+
+  // Nav border once the page scrolls
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Racing Online carousel: native swipe/scroll, dots, gentle autoplay
+  document.querySelectorAll('[data-carousel]').forEach((root) => {
+    const track = root.querySelector('.carousel__track');
+    const slides = [...track.children];
+    const dotsWrap = root.parentElement.querySelector('[data-dots]');
+    let index = 0, dir = 1, resumeAt = 0, hovering = false;
+
+    const dots = slides.map((slide, k) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'carousel__dot';
+      b.setAttribute('aria-label', 'Show screenshot ' + (k + 1));
+      b.innerHTML = '<span></span>';
+      b.addEventListener('click', () => { go(k); resumeAt = Date.now() + 7000; });
+      dotsWrap.appendChild(b);
+      return b;
+    });
+
+    const paint = () => dots.forEach((d, k) => d.setAttribute('aria-current', k === index ? 'true' : 'false'));
+    const go = (k) => { track.scrollTo({ left: k * track.clientWidth, behavior: 'smooth' }); };
+
+    track.addEventListener('scroll', () => {
+      const k = Math.round(track.scrollLeft / track.clientWidth);
+      if (k !== index) { index = k; paint(); }
+    }, { passive: true });
+    ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach((ev) =>
+      track.addEventListener(ev, () => { resumeAt = Date.now() + 7000; }, { passive: true }));
+    // Mouse drag (touch and trackpads already scroll natively)
+    let dragX = null, dragStart = 0, dragFrom = 0;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      dragX = e.clientX; dragStart = track.scrollLeft; dragFrom = index;
+      track.classList.add('is-dragging');
+      track.setPointerCapture(e.pointerId);
+    });
+    track.addEventListener('pointermove', (e) => {
+      if (dragX === null) return;
+      track.scrollLeft = dragStart - (e.clientX - dragX);
+    });
+    const endDrag = (e) => {
+      if (dragX === null) return;
+      const dx = e.clientX - dragX;
+      dragX = null;
+      let k = dragFrom;
+      if (dx < -40) k = Math.min(slides.length - 1, dragFrom + 1);
+      else if (dx > 40) k = Math.max(0, dragFrom - 1);
+      go(k);
+      // Re-enable snapping only after the glide, so it can't snap to a different slide
+      setTimeout(() => track.classList.remove('is-dragging'), 650);
+    };
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    root.addEventListener('mouseenter', () => { hovering = true; });
+    root.addEventListener('mouseleave', () => { hovering = false; });
+    paint();
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setInterval(() => {
+      if (reduceMotion.matches || hovering || document.hidden || Date.now() < resumeAt) return;
+      if (index + dir >= slides.length || index + dir < 0) dir = -dir;
+      go(index + dir);
+    }, 5000);
+  });
+})();
+</script>
+</body>
+</html>
